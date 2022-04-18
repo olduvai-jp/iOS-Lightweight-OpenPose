@@ -52,7 +52,7 @@ using namespace std;
                                    inputImage: (UIImage *) inputImage {
         int heatmap_w = heatmapShape[0];
         int heatmap_h = heatmapShape[1];
-        int keypoint_number = heatmapShape[2] - 4; // remove eyes, ears and background
+        int keypoint_number = heatmapShape[2] - 1; // remove background
         
         int sizes[] = {heatmap_w, heatmap_h, keypoint_number};
         Mat imgFloat = Mat(2, sizes, CV_32FC1, Scalar(0));
@@ -72,6 +72,8 @@ using namespace std;
                 }
             }
         }
+        
+        if (maxValue == 0) maxValue = 1;
         
         unsigned int scale = 255/(maxValue - minValue);
         for(int i=0; i<heatmap_h; i++) {

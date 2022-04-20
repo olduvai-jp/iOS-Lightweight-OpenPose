@@ -67,11 +67,11 @@ class HeatmapVideoController: UIViewController {
         
         //
         // process the heatnap
-        // output.heat_map_2 => (1,1,n, w, h)
+        // output.heat_map_2 => (1, n, w, h)
         //
-        let keypoint_number = output.heat_map_2.shape[2].int32Value
-        let heatmap_w = output.heat_map_2.shape[3].int32Value
-        let heatmap_h = output.heat_map_2.shape[4].int32Value
+        let keypoint_number = output.heat_map_2.shape[1].int32Value
+        let heatmap_w = output.heat_map_2.shape[2].int32Value
+        let heatmap_h = output.heat_map_2.shape[3].int32Value
         
         var tensorShape:[Int32] = [heatmap_w, heatmap_h, keypoint_number]
         let convertedHeatMap = OpenCVWrapper.visualizeHeatmap(
